@@ -1,5 +1,4 @@
 SELECT
-  episode_id,
   event_id,
   event_type,
   cz_fips_code,
