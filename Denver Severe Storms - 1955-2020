@@ -1,0 +1,19 @@
+SELECT
+  episode_id,
+  event_id,
+  event_type,
+  cz_fips_code,
+  cz_name,
+  event_begin_time,
+  event_end_time,
+  magnitude,
+  magnitude_type,
+  event_latitude,
+  event_longitude
+FROM
+  `bigquery-public-data.noaa_historic_severe_storms.storms*`
+WHERE
+  state = 'Colorado'
+  AND cz_fips_code = '31'
+LIMIT
+  1000
