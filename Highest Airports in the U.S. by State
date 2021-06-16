@@ -1,1 +1,24 @@
-
+SELECT
+  air.name,
+  air.latitude,
+  air.longitude,
+  air.airport_type,
+  air.country,
+  air.mil_code,
+  air.airport_use,
+  air.state_abbreviation,
+  air.elevation
+FROM
+  `bigquery-public-data.faa.us_airports` air
+    JOIN
+        (SELECT state_abbreviation,
+        max(elevation) AS Airport_Elevation
+            FROM `bigquery-public-data.faa.us_airports`
+                WHERE mil_code = 'CIVIL' AND
+                airport_type = 'Aerodome' AND
+                airport_use = 'Public'
+                    GROUP BY state_abbreviation) maxe
+            ON maxe.state_abbreviation = air.state_abbreviation
+            AND maxe.Airport_Elevation = air.elevation
+LIMIT 
+  1000
