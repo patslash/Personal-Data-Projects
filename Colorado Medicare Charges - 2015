@@ -1,0 +1,16 @@
+SELECT
+  provider_state,
+  provider_city,
+  SUM(total_discharges) AS Total_Discharges,
+  SUM(average_covered_charges) AS Total_Average_Covered_Charges,
+  SUM(average_total_payments) AS Total_Average_Total_Payments,
+  SUM(average_medicare_payments) AS Total_Average_Medicare_payments,
+  SUM(average_covered_charges) / SUM(total_discharges) AS Covered_Charges_per_Discharge,
+  SUM(average_total_payments) / SUM(average_covered_charges) AS Collection_Percentage
+FROM
+  `bigquery-public-data.cms_medicare.inpatient_charges_2015`
+WHERE 
+  provider_state = 'CO'
+GROUP BY
+  provider_state,
+  provider_city
