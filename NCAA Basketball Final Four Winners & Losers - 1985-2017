@@ -1,0 +1,18 @@
+SELECT
+  season,
+  round,
+  game_date,
+  CONCAT(win_market," ",win_name) AS winning_team_name,
+  win_pts,
+  CONCAT(lose_market," ",lose_name) AS losing_team_name,
+  lose_pts,
+  win_pts+lose_pts AS total_pts,
+  num_ot
+FROM
+  `bigquery-public-data.ncaa_basketball.mbb_historical_tournament_games`
+WHERE
+  round <= 4
+ORDER BY
+  season
+LIMIT
+  1000
